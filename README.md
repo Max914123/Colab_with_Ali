@@ -1,4 +1,4 @@
-# 📈 BTC Price Prediction
+# 📈 BTC Price Predictions
 
 A collaborative Python project for predicting Bitcoin (BTC) prices using time series analysis and LSTM deep learning models. Designed for team collaboration, modular development, and extensibility.
 
