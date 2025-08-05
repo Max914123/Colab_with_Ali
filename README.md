@@ -39,9 +39,9 @@ time-series-project/
 
 | Developer | Task Branch              | Responsibilities                       |
 |-----------|--------------------------|----------------------------------------|
-| You       | `feature/preprocessing`  | Data cleaning, feature engineering     |
+| Mohammad  | `feature/preprocessing`  | Data cleaning, feature engineering     |
 | Mohammad  | `feature/modeling`       | Model training and prediction (LSTM)   |
-| Mohammad  | `feature/evaluation`     | Evaluation metrics and plots           |
+| Ali       | `feature/evaluation`     | Evaluation metrics and plots           |
 
 ### 🧪 Workflow
 
@@ -138,7 +138,7 @@ MIT License – feel free to use, modify, and contribute.
 
 ## 👨‍💻 Authors
 
-- **You** – Cybersecurity & ML Engineer  
-- **Your Brother** – Optical/Photonics Engineer & Data Analyst
+- **Ali** – Cybersecurity & ML Engineer  
+- **Mohammad** – Optical/Photonics Engineer & Data Analyst
 
 ---
