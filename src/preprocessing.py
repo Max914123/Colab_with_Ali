@@ -8,13 +8,31 @@ class Preprocessing:
         self.df_features = None
 
     def load_data(self, file_path: str) -> pd.DataFrame:
-        df = pd.read_csv(file_path)  # ← remove delimiter=';' because it's actually comma-separated
-        df.columns = df.columns.str.strip()  # Strip any extra whitespace
-        print("Columns loaded:", df.columns.tolist())  # Optional debug print
-        df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s')  # Your timestamps are in UNIX seconds
+   
+        # Read CSV with proper encoding, e.g., 'cp1252' or try 'utf-8' if preferred
+        df = pd.read_csv(file_path, encoding='cp1252')
+        
+        # Strip whitespace in columns, just in case
+        df.columns = df.columns.str.strip()
+        print("Columns loaded:", df.columns.tolist())  # Debug print
+        
+        # Validate expected column
+        if 'Timestamp' not in df.columns:
+            raise ValueError("Expected 'Timestamp' column not found.")
+        
+        # Convert UNIX timestamp (seconds) to datetime
+        df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s')
+        
+        # Sort by timestamp and reset index
         df = df.sort_values('Timestamp').reset_index(drop=True)
+        
+        # Store raw data in the class attribute
         self.df_raw = df
+        
         return df
+
+
+
 
 
     def clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
