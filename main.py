@@ -5,28 +5,24 @@ from src.preprocessing import Preprocessing
 
 
 def main():
-    # Path to raw data CSV
-    data_path = os.path.join('data', 'btcusd_1-min_data.csv')
-    
-    # Initialize preprocessing
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    data_path = os.path.join(base_dir, 'data', 'btcusd_1-min_data.csv')
+
     preprocessor = Preprocessing()
 
     print("Loading data...")
     df_raw = preprocessor.load_data(data_path)
-    print(f"Raw data loaded: {df_raw.shape} rows")
 
     print("Cleaning data...")
     df_clean = preprocessor.clean_data(df_raw)
-    print(f"Cleaned data: {df_clean.shape} rows")
 
     print("Creating features...")
     df_features = preprocessor.create_features(df_clean)
-    print(f"Features created: {df_features.shape} rows")
 
-    # Save the feature-engineered dataset for modeling
-    output_path = os.path.join('data', 'btcusd_features.csv')
+    # ✅ Ensure the output directory exists
+    output_dir = os.path.join(base_dir, 'data')
+    os.makedirs(output_dir, exist_ok=True)
+
+    output_path = os.path.join(output_dir, 'btcusd_features.csv')
     df_features.to_csv(output_path, index=False)
-    print(f"Feature-engineered data saved to {output_path}")
-
-if __name__ == '__main__':
-    main()
+    print(f"Saved feature-engineered data to: {output_path}")

@@ -8,16 +8,14 @@ class Preprocessing:
         self.df_features = None
 
     def load_data(self, file_path: str) -> pd.DataFrame:
-        """
-        Load raw BTC price data from a CSV file with semicolon delimiter.
-        Expects columns: Timestamp,Open,High,Low,Close,Volume
-        Converts Timestamp to datetime and sorts by it.
-        """
-        df = pd.read_csv(file_path, delimiter=';')
-        df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+        df = pd.read_csv(file_path)  # ← remove delimiter=';' because it's actually comma-separated
+        df.columns = df.columns.str.strip()  # Strip any extra whitespace
+        print("Columns loaded:", df.columns.tolist())  # Optional debug print
+        df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s')  # Your timestamps are in UNIX seconds
         df = df.sort_values('Timestamp').reset_index(drop=True)
         self.df_raw = df
         return df
+
 
     def clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """
